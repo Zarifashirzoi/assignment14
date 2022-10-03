@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fruit List</title>
+    </head>
+
+    <body>
+
+        <input type="text" id="fruit-name">
+        <button onclick="search()">Search</button>
+        <button onclick="reset()">Reset</button>
+
+        <br>
+        <br>
+        <br>
+
+        <!-- Title -->
+        <p>Fruit List</p>
+
+        <!-- Table -->
+        <table style="width: 100%; border:1px solid #000;">
+            <thead>
+                <th style="text-align: left;">Code</th>
+                <th style="text-align: left;">Name</th>
+                <th style="text-align: left;">Price</th>
+            </thead>
+            <tbody id="fruits">
+
+            </tbody>
+        </table>
+
+        <script>
+
+            let fruits = [
+                {
+                    code: 100,
+                    name: 'Melon',
+                    price: '250 USD'
+                },
+                {
+                    code: 101,
+                    name: 'Apple',
+                    price: '120 USD'
+                },
+                {
+                    code: 102,
+                    name: 'Peach',
+                    price: '200 USD'
+                },
+                {
+                    code: 103,
+                    name: 'Apple',
+                    price: '200 USD'
+                },
+                {
+                    code: 104,
+                    name: 'Banana',
+                    price: '200 USD'
+                }
+
+            ];
+
+            // Add new fruid
+            function addFruit(code, name, price){
+                var table = document.getElementById("fruits");
+
+                var row = table.insertRow(0);
+                
+                var cell0 = row.insertCell(0);
+                var cell1 = row.insertCell(1);
+                var cell2 = row.insertCell(2);
+
+                cell0.innerHTML = code;
+                cell1.innerHTML = name;
+                cell2.innerHTML = price;
+            }
+
+            // Get all fruits
+            function getFruits(){
+                fruits.forEach(fruits => {
+                    addFruit(fruits.code, fruits.name, fruits.price);
+                });
+            }
+
+
+
+            // Add all fruits for the first time
+            getFruits();
+
+            // Search fruit by name
+            function search(){
+                document.getElementById("fruits").innerHTML="";
+                let name = document.getElementById('fruit-name').value;
+             
+                    fruits.filter((fruits) => {
+                    if(fruits.name == name){
+                        addFruit(fruits.code, fruits.name, fruits.price);
+                    }
+                })
+            }
+
+            // Reset searching and display all fruits in table
+            function reset(){
+                document.getElementById("fruits").innerHTML="";
+                document.getElementById("fruit-name").value="";
+                getFruits();
+            }
+        </script>
+    </body>
+</html>
